@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Suuuupersvårt Quiz</title>
+    <style>
+      body {
+        font-family: Garamond, sans-serif;
+        text-align: center;
+        padding: 20px;
+        background-color: black;
+        color: white;
+      }
+
+      .question-container {
+        display: none;
+      }
+
+      #result {
+        display: none;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Suuuupersvårt quiz</h1>
+
+    <div id="question1" class="question-container">
+      <h2>Är du Linnis?</h2>
+      <button onclick="checkAnswer(true)">Ja</button>
+      <button onclick="checkAnswer(false)">Nej</button>
+
+      <img
+        src="images/till linnea.png"
+        alt="Om du ser det här har något gått snett med bilden, men det var en doodle jag ritade åt dig med stjärnor och hjärtan :D"
+        style="display: block; margin: 10px auto; height: 65%; width: 65%"
+      />
+    </div>
+
+    <div id="question2" class="question-container">
+      <h2>Bevisa det. När är vår årsdag? (dag/månad/år)</h2>
+      <input type="text" id="answer2" placeholder="Ange datum (dd/mm/yyyy)" />
+      <button onclick="checkTextAnswer()">Submit</button>
+
+      <img
+        src="images/till linnea.png"
+        alt="Om du ser det här har något gått snett med bilden, men det var en doodle jag ritade åt dig med stjärnor och hjärtan :D"
+        style="display: block; margin: 10px auto; height: 65%; width: 65%"
+      />
+    </div>
+
+    <div id="question3" class="question-container">
+      <h2>Älskar jag dig mest?</h2>
+      <button onclick="checkAnswer(true)">Ja</button>
+      <button onclick="checkAnswer(false)">Nej</button>
+      <img
+        src="images/till linnea.png"
+        alt="Om du ser det här har något gått snett med bilden, men det var en doodle jag ritade åt dig med stjärnor och hjärtan :D"
+        style="display: block; margin: 10px auto; height: 65%; width: 65%"
+      />
+    </div>
+
+    <div id="question4" class="question-container">
+      <h2>Vill du bli min valentine?</h2>
+      <button onclick="checkAnswer(true)">Ja</button>
+      <button onclick="checkAnswer(false)">Nej</button>
+      <img
+        src="images/till linnea.png"
+        alt="Om du ser det här har något gått snett med bilden, men det var en doodle jag ritade åt dig med stjärnor och hjärtan :D"
+        style="display: block; margin: 10px auto; height 65%; width: 65%;"
+      />
+    </div>
+
+    <div id="result"></div>
+
+    <script>
+      let currentQuestion = 1;
+
+      function showQuestion(questionNumber) {
+        document.querySelectorAll(".question-container").forEach((item) => {
+          item.style.display = "none";
+        });
+        document.getElementById(`question${questionNumber}`).style.display =
+          "block";
+      }
+
+      function checkAnswer(isCorrect) {
+        hideResult();
+
+        if (isCorrect) {
+          currentQuestion++;
+          if (currentQuestion <= 4) {
+            showQuestion(currentQuestion);
+          } else {
+            showResult(
+              "YIPPIEEEEEEEEE!!!!!!!!!!!!! DU ÄR MIN VALENTINE :D <a href='https://www.youtube.com/shorts/7fTHD07Q9Pw?feature=share' target='_blank'>Min reaktion nu</a>"
+            );
+          }
+        } else {
+          showResult(
+            ":-( <a href='https://open.spotify.com/playlist/37i9dQZF1EIdChYeHNDfK5?si=258767651fe14ffd' target='_blank'>Min reaktion nu</a>"
+          );
+        }
+      }
+
+      function checkTextAnswer() {
+        hideResult();
+        const answer2 = document.getElementById("answer2").value;
+        if (answer2 === "22/09/2022") {
+          currentQuestion++;
+          if (currentQuestion <= 4) {
+            showQuestion(currentQuestion);
+          } else {
+            showResult("Grattis! Du har klarat quizet!");
+          }
+        } else {
+          showResult("Fel svar. Försök igen.");
+        }
+      }
+
+      function showResult(message) {
+        document.getElementById("result").innerHTML = message;
+        document.getElementById("result").style.display = "block";
+      }
+
+      function hideResult() {
+        document.getElementById("result").style.display = "none";
+      }
+
+      showQuestion(currentQuestion);
+    </script>
+  </body>
+</html>
